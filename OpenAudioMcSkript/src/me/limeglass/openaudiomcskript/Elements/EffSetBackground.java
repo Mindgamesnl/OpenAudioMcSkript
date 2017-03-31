@@ -11,6 +11,7 @@ import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
 import net.openaudiomc.actions.command;
+import me.mindgamesnl.openaudiomc.publicApi.OpenAudioApi;
 
 public class EffSetBackground extends Effect {
 	
@@ -35,7 +36,7 @@ public class EffSetBackground extends Effect {
 	protected void execute(Event e) {
 		if (players != null) {
 			for (Player player : players.getAll(e)) {
-				command.setBg(player.getName(), URL.getSingle(e));
+				OpenAudioApi.setBg(player, URL.getSingle(e));
 			}
 		}
 	}
