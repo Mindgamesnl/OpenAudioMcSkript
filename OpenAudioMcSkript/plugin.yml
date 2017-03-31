@@ -3,4 +3,4 @@ authors: [LimeGlass, Legoman99573]
 description: Skript addon for OpenAudioMc
 version: 1.0.0
 main: me.limeglass.openaudiomcskript.OpenAudioMcSkript
-depend: [Skript, OpenAudio]
+depend: [Skript, OpenAudio, WorldGuard]
