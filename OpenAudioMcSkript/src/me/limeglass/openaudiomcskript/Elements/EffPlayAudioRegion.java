@@ -9,6 +9,9 @@ import ch.njol.skript.lang.Effect;
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.util.Kleenean;
+
+import com.sk89q.worldguard.bukkit.WGBukkit;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.openaudiomc.actions.command;
 
 public class EffPlayAudioRegion extends Effect {
@@ -32,7 +35,13 @@ public class EffPlayAudioRegion extends Effect {
 	@Override
 	protected void execute(Event e) {
 		if (Region != null && URL != null) {
-			command.playRegion(Region.getSingle(e), URL.getSingle(e));
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				for(ProtectedRegion r : WGBukkit.getRegionManager(p.getWorld()).getApplicableRegions(p.getLocation())) {
+					if (Region.getSingle(e).equalsIgnoreCase(r.getId())) {
+						command.playNormalSound(p.getName(), URL.getSingle(e));
+					}
+		    		}
+			}
 		}
 	}
 }
